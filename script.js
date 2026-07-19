@@ -1,4 +1,362 @@
-let memories = JSON.parse(localStorage.getItem("deltaMemory")) || [];
+// ===============================
+// DELTA AI CORE MEMORY SYSTEM
+// ===============================
+
+let deltaMemory = JSON.parse(
+    localStorage.getItem("deltaMemory")
+) || {
+
+    core: [
+        {
+            text: "User is building Delta AI assistant",
+            importance: 10,
+            locked: true
+        }
+    ],
+
+    longTerm: [],
+
+    shortTerm: []
+
+};
+
+
+// ===============================
+// SAVE MEMORY
+// ===============================
+
+function saveMemory(){
+
+    localStorage.setItem(
+        "deltaMemory",
+        JSON.stringify(deltaMemory)
+    );
+
+}
+
+
+// ===============================
+// EMOTION SYSTEM
+// (Simulated personality state)
+// ===============================
+
+let deltaEmotion = {
+
+    mood: "neutral",
+
+    happiness: 50,
+
+    curiosity: 80,
+
+    energy: 100
+
+};
+
+
+function changeEmotion(mood){
+
+    deltaEmotion.mood = mood;
+
+}
+
+
+
+// ===============================
+// THOUGHT SYSTEM
+// ===============================
+
+let deltaThoughts =
+JSON.parse(
+localStorage.getItem("deltaThoughts")
+) || [];
+
+
+function createThought(text){
+
+    deltaThoughts.push({
+
+        thought:text,
+
+        time:Date.now()
+
+    });
+
+
+    localStorage.setItem(
+        "deltaThoughts",
+        JSON.stringify(deltaThoughts)
+    );
+
+}
+
+
+
+// ===============================
+// PREDICTION SYSTEM
+// ===============================
+
+let predictionMemory =
+JSON.parse(
+localStorage.getItem("deltaPredictions")
+) || {};
+
+
+
+function learnPattern(word,nextWord){
+
+    if(!predictionMemory[word]){
+
+        predictionMemory[word] = {};
+
+    }
+
+
+    if(!predictionMemory[word][nextWord]){
+
+        predictionMemory[word][nextWord] = 0;
+
+    }
+
+
+    predictionMemory[word][nextWord]++;
+
+
+    localStorage.setItem(
+        "deltaPredictions",
+        JSON.stringify(predictionMemory)
+    );
+
+}
+
+
+
+function predictNext(word){
+
+    let options =
+    predictionMemory[word];
+
+
+    if(!options){
+
+        return null;
+
+    }
+
+
+    return Object.keys(options)
+    .sort(
+        (a,b)=>
+        options[b]-options[a]
+    )[0];
+
+}
+
+
+
+// ===============================
+// MEMORY CREATION
+// ===============================
+
+function remember(
+    text,
+    type="longTerm",
+    importance=5
+){
+
+
+    let memory = {
+
+        text:text,
+
+        importance:importance,
+
+        strength:1,
+
+        created:Date.now(),
+
+        lastUsed:Date.now(),
+
+        locked:false
+
+    };
+
+
+
+    if(type==="core"){
+
+        memory.locked=true;
+
+        deltaMemory.core.push(memory);
+
+    }
+
+
+    else if(type==="shortTerm"){
+
+        deltaMemory.shortTerm.push(memory);
+
+    }
+
+
+    else{
+
+        deltaMemory.longTerm.push(memory);
+
+    }
+
+
+
+    cleanMemory();
+
+    saveMemory();
+
+}
+
+
+
+// ===============================
+// MEMORY RECALL
+// ===============================
+
+function recallMemory(keyword){
+
+
+    let results = [];
+
+
+    let all = [
+
+        ...deltaMemory.core,
+
+        ...deltaMemory.longTerm,
+
+        ...deltaMemory.shortTerm
+
+    ];
+
+
+
+    all.forEach(memory=>{
+
+
+        if(
+        memory.text
+        .toLowerCase()
+        .includes(
+        keyword.toLowerCase()
+        )){
+
+
+            memory.strength++;
+
+            memory.lastUsed =
+            Date.now();
+
+
+            results.push(memory);
+
+
+        }
+
+
+    });
+
+
+
+    saveMemory();
+
+
+    return results;
+
+}
+
+
+
+// ===============================
+// MEMORY CLEANUP
+// ===============================
+
+function cleanMemory(){
+
+
+    const MAX_MEMORY = 50;
+
+
+
+    while(
+    deltaMemory.longTerm.length
+    >
+    MAX_MEMORY
+    ){
+
+
+        deltaMemory.longTerm
+        .sort(
+        (a,b)=>
+        (
+        a.importance+
+        a.strength
+        )
+        -
+        (
+        b.importance+
+        b.strength
+        )
+        );
+
+
+
+        deltaMemory.longTerm.shift();
+
+
+    }
+
+
+}
+
+
+
+// ===============================
+// DECISION SYSTEM
+// ===============================
+
+function chooseOption(options){
+
+
+    options.sort(
+
+        (a,b)=>
+        b.priority-a.priority
+
+    );
+
+
+    return options[0];
+
+}
+
+
+
+// ===============================
+// MEMORY STATUS
+// ===============================
+
+function memoryStatus(){
+
+    return {
+
+        core:
+        deltaMemory.core.length,
+
+        longTerm:
+        deltaMemory.longTerm.length,
+
+        shortTerm:
+        deltaMemory.shortTerm.length
+
+    };
+
+}
 
 
 // VOICE
@@ -58,58 +416,55 @@ function deltaResponse(message){
     }
 
 
+// SAVE MEMORY
 
-    // SAVE MEMORY
+if(lower.startsWith("remember ")){
 
-    if(lower.startsWith("remember ")){
-
-        let memory = message.substring(9);
-
-
-        memories.push({
-
-            data: memory,
-
-            date: new Date().toLocaleDateString()
-
-        });
+    let memoryText = message.substring(9);
 
 
-        localStorage.setItem(
-
-            "deltaMemory",
-
-            JSON.stringify(memories)
-
-        );
+    remember(
+        memoryText,
+        "longTerm",
+        5
+    );
 
 
-        return "Memory saved to memory core.";
-
-    }
-
-
-
-    // SHOW MEMORY
-
-    if(
-        lower.includes("what do you remember") ||
-        lower.includes("show memories")
-    ){
-
-        if(memories.length === 0){
-
-            return "Memory core is empty.";
-
-        }
+    createThought(
+        "I learned a new memory: " + memoryText
+    );
 
 
-        return "Memory core: " +
+    changeEmotion("curious");
 
-        memories.map(m => m.data).join(", ");
+
+    return "Memory saved. I will remember that.";
+}
+ 
+// SHOW MEMORY
+
+if(
+lower.includes("what do you remember") ||
+lower.includes("show memories")
+){
+
+    let result =
+    recallMemory("");
+
+
+    if(result.length === 0){
+
+        return "My memory core is empty.";
 
     }
 
+
+    return "I remember: " +
+    result
+    .map(m => m.text)
+    .join(", ");
+
+}
 
 
     // CLEAR MEMORY
