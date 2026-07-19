@@ -1,7 +1,7 @@
 // ===============================
 // DELTA AI CORE MEMORY SYSTEM
 // ===============================
-localStorage.removeItem("deltaMemory");
+
 let deltaMemory = JSON.parse(
     localStorage.getItem("deltaMemory")
 ) || {
