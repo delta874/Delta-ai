@@ -163,47 +163,50 @@ function remember(
     importance=5
 ){
 
+    let storage = deltaMemory[type];
 
-    let memory = {
-
-        text:text,
-
-        importance:importance,
-
-        strength:1,
-
-        created:Date.now(),
-
-        lastUsed:Date.now(),
-
-        locked:false
-
-    };
+    let existing = storage.find(
+        memory =>
+        memory.text.toLowerCase() === text.toLowerCase()
+    );
 
 
+    if(existing){
 
-    if(type==="core"){
+        existing.strength++;
 
-        memory.locked=true;
+        existing.importance++;
 
-        deltaMemory.core.push(memory);
+        existing.lastUsed = Date.now();
+
+        createThought(
+            "Memory strengthened: " + text
+        );
 
     }
-
-
-    else if(type==="shortTerm"){
-
-        deltaMemory.shortTerm.push(memory);
-
-    }
-
 
     else{
 
-        deltaMemory.longTerm.push(memory);
+        let memory = {
+
+            text:text,
+
+            importance:importance,
+
+            strength:1,
+
+            created:Date.now(),
+
+            lastUsed:Date.now(),
+
+            locked:false
+
+        };
+
+
+        storage.push(memory);
 
     }
-
 
 
     cleanMemory();
