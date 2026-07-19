@@ -281,41 +281,63 @@ function recallMemory(keyword){
 
 function cleanMemory(){
 
-
     const MAX_MEMORY = 50;
 
 
-
-    while(
-    deltaMemory.longTerm.length
-    >
-    MAX_MEMORY
-    ){
+    // Never touch core memory
+    // Core memories are locked
 
 
-        deltaMemory.longTerm
-        .sort(
-        (a,b)=>
-        (
-        a.importance+
-        a.strength
-        )
-        -
-        (
-        b.importance+
-        b.strength
-        )
+    while(deltaMemory.longTerm.length > MAX_MEMORY){
+
+
+        let lowestMemory =
+        deltaMemory.longTerm[0];
+
+
+        deltaMemory.longTerm.forEach(memory=>{
+
+
+            let score =
+            memory.importance +
+            memory.strength;
+
+
+            let lowestScore =
+            lowestMemory.importance +
+            lowestMemory.strength;
+
+
+            if(score < lowestScore){
+
+                lowestMemory = memory;
+
+            }
+
+
+        });
+
+
+
+        let index =
+        deltaMemory.longTerm.indexOf(
+            lowestMemory
         );
 
 
-
-        deltaMemory.longTerm.shift();
+        deltaMemory.longTerm.splice(
+            index,
+            1
+        );
 
 
     }
 
 
+    saveMemory();
+
 }
+
 
 
 
