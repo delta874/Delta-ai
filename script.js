@@ -493,19 +493,19 @@ function addMessage(sender, text, type){
 function deltaResponse(message){
 
     let lower = message.toLowerCase();
-    
-    let intent = detectIntent(message);let 
-   
-           createThought(
+
+    let intent = detectIntent(message);
+
+    createThought(
         "User intent detected: " + intent
-    ); 
-   
-        if(lower === "hi" || lower === "hello"){
+    );
+
+
+    if(lower === "hi" || lower === "hello"){
 
         return "Running system diagnostic... Systems online. Hello, I am Delta, your personal AI assistant.";
 
     }
-
 
 
     if(lower.includes("personality")){
@@ -513,7 +513,6 @@ function deltaResponse(message){
         return "I am Delta. Helpful, curious, friendly, technology focused, and always ready to create.";
 
     }
-
 
 // SAVE MEMORY
 
