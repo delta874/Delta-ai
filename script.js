@@ -383,6 +383,75 @@ function memoryStatus(){
 
 }
 
+// ===============================
+// DELTA INTENT RECOGNITION SYSTEM
+// ===============================
+
+
+function detectIntent(message){
+
+    let lower = message.toLowerCase();
+
+
+    if(
+        lower.includes("hello") ||
+        lower.includes("hi") ||
+        lower.includes("hey")
+    ){
+
+        return "greeting";
+
+    }
+
+
+    if(
+        lower.includes("remember") ||
+        lower.includes("memory") ||
+        lower.includes("forget")
+    ){
+
+        return "memory";
+
+    }
+
+
+    if(
+        lower.includes("code") ||
+        lower.includes("javascript") ||
+        lower.includes("program")
+    ){
+
+        return "coding";
+
+    }
+
+
+    if(
+        lower.includes("diagnostic") ||
+        lower.includes("system") ||
+        lower.includes("status")
+    ){
+
+        return "diagnostic";
+
+    }
+
+
+    if(
+        lower.includes("?") ||
+        lower.includes("what") ||
+        lower.includes("how") ||
+        lower.includes("why")
+    ){
+
+        return "question";
+
+    }
+
+
+    return "conversation";
+
+}
 
 // VOICE
 
