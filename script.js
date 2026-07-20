@@ -493,9 +493,14 @@ function addMessage(sender, text, type){
 function deltaResponse(message){
 
     let lower = message.toLowerCase();
-
-
-    if(lower === "hi" || lower === "hello"){
+    
+    let intent = detectIntent(message);let 
+   
+           createThought(
+        "User intent detected: " + intent
+    ); 
+   
+        if(lower === "hi" || lower === "hello"){
 
         return "Running system diagnostic... Systems online. Hello, I am Delta, your personal AI assistant.";
 
