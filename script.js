@@ -31,7 +31,7 @@ for (let i = 0; i < 500; i++) {
 let star = {
     x: 0,
     y: 0,
-    radius: 90
+    radius: 150
 };
 
 
@@ -39,8 +39,17 @@ let star = {
 let planet = {
     angle: 0,
     distance: 150,
-    radius: 5,
+    radius: 15,
     speed: 0.02
+};
+
+
+// MOON
+let moon = {
+    angle: 0,
+    distance: 15,
+    radius: 2,
+    speed: 0.08
 };
 
 
@@ -59,13 +68,11 @@ canvas.addEventListener("touchmove", function(e){
 
         let distance = Math.sqrt(dx * dx + dy * dy);
 
-
         if(lastDistance){
 
             let change = distance - lastDistance;
 
             camera.zoom += change * 0.005;
-
 
             if(camera.zoom < 0.2){
                 camera.zoom = 0.2;
@@ -95,9 +102,7 @@ function draw(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-
     ctx.save();
-
 
     // CAMERA
     ctx.translate(
@@ -106,7 +111,6 @@ function draw(){
     );
 
     ctx.scale(camera.zoom, camera.zoom);
-
 
 
     // DRAW BACKGROUND STARS
@@ -122,7 +126,6 @@ function draw(){
     }
 
 
-
     // DRAW SUN
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
@@ -130,68 +133,82 @@ function draw(){
     ctx.fill();
 
 
-
     // PLANET POSITION
     let planetX = star.x + Math.cos(planet.angle) * planet.distance;
     let planetY = star.y + Math.sin(planet.angle) * planet.distance;
 
 
+    // MOON POSITION
+    let moonX = planetX + Math.cos(moon.angle) * moon.distance;
+    let moonY = planetY + Math.sin(moon.angle) * moon.distance;
 
-    // DRAW PLANET
+
     // PLANET BODY
-let gradient = ctx.createRadialGradient(
-    planetX - 3,
-    planetY - 3,
-    2,
-    planetX,
-    planetY,
-    planet.radius
-);
+    let gradient = ctx.createRadialGradient(
+        planetX - 3,
+        planetY - 3,
+        2,
+        planetX,
+        planetY,
+        planet.radius
+    );
 
-gradient.addColorStop(0, "#4db8ff");
-gradient.addColorStop(1, "#003366");
-
-
-ctx.beginPath();
-ctx.arc(
-    planetX,
-    planetY,
-    planet.radius,
-    0,
-    Math.PI * 2
-);
-
-ctx.fillStyle = gradient;
-ctx.fill();
+    gradient.addColorStop(0, "#4db8ff");
+    gradient.addColorStop(1, "#003366");
 
 
-// ATMOSPHERE GLOW
-ctx.beginPath();
-ctx.arc(
-    planetX,
-    planetY,
-    planet.radius + 3,
-    0,
-    Math.PI * 2
-);
+    ctx.beginPath();
+    ctx.arc(
+        planetX,
+        planetY,
+        planet.radius,
+        0,
+        Math.PI * 2
+    );
 
-ctx.strokeStyle = "rgba(100,200,255,0.5)";
-ctx.lineWidth = 2;
-ctx.stroke();
+    ctx.fillStyle = gradient;
+    ctx.fill();
 
+
+    // ATMOSPHERE GLOW
+    ctx.beginPath();
+    ctx.arc(
+        planetX,
+        planetY,
+        planet.radius + 3,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.strokeStyle = "rgba(100,200,255,0.5)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+
+    // DRAW MOON
+    ctx.beginPath();
+    ctx.arc(
+        moonX,
+        moonY,
+        moon.radius,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle = "#cccccc";
+    ctx.fill();
 
 
     ctx.restore();
 
 
-
-    // MOVE PLANET
+    // MOVE OBJECTS
     planet.angle += planet.speed;
+    moon.angle += moon.speed;
 
 
     requestAnimationFrame(draw);
 
 }
-
 
 draw();
