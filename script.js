@@ -35,23 +35,19 @@ let star = {
 };
 
 
-// PLANET
 let planet = {
     angle: 0,
-    distance: 400,
+    distance: 700,
     radius: 15,
     speed: 0.02
 };
 
-
-// MOON
 let moon = {
     angle: 0,
-    distance: 25,
+    distance: 60,
     radius: 2,
     speed: 0.08
 };
-
 
 // PINCH ZOOM
 let lastDistance = null;
