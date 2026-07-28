@@ -91,6 +91,8 @@ canvas.addEventListener("touchmove", function(e){
 
     if(e.touches.length === 2){
 
+        e.preventDefault();
+
         let touch1 = e.touches[0];
         let touch2 = e.touches[1];
 
@@ -99,11 +101,13 @@ canvas.addEventListener("touchmove", function(e){
 
         let distance = Math.sqrt(dx * dx + dy * dy);
 
-        if(lastDistance){
+
+        if(lastDistance !== null){
 
             let change = distance - lastDistance;
 
-             camera.zoom += change * 0.01;
+            camera.zoom += change * 0.01;
+
 
             if(camera.zoom < 0.2){
                 camera.zoom = 0.2;
