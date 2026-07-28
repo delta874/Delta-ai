@@ -31,7 +31,7 @@ for (let i = 0; i < 500; i++) {
 let star = {
     x: 0,
     y: 0,
-    radius: 30
+    radius: 90
 };
 
 
@@ -39,7 +39,7 @@ let star = {
 let planet = {
     angle: 0,
     distance: 150,
-    radius: 10,
+    radius: 5,
     speed: 0.02
 };
 
