@@ -35,22 +35,53 @@ let star = {
 };
 
 
-// PLANET
-let planet = {
+// PLANETS
+let planets = [
+{
+    name: "Ash",
     angle: 0,
-    distance: 500,
-    radius: 5,
-    speed: 0.02
-};
+    distance: 250,
+    radius: 8,
+    speed: 0.05,
+    color: "#555555"
+},
 
+{
+    name: "Inferno",
+    angle: 1,
+    distance: 450,
+    radius: 14,
+    speed: 0.025,
+    color: "#8b2e00"
+},
 
-// MOON
-let moon = {
-    angle: 0,
-    distance: 15,
-    radius: 2,
-    speed: 0.08
-};
+{
+    name: "Genesis",
+    angle: 2,
+    distance: 700,
+    radius: 16,
+    speed: 0.015,
+    color: "#3399ff"
+},
+
+{
+    name: "Titan",
+    angle: 3,
+    distance: 1000,
+    radius: 40,
+    speed: 0.008,
+    color: "#c58b3c"
+},
+
+{
+    name: "Frost",
+    angle: 4,
+    distance: 1400,
+    radius: 25,
+    speed: 0.004,
+    color: "#66ccff"
+}
+];
 
 
 // PINCH ZOOM
