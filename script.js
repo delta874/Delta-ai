@@ -103,7 +103,7 @@ canvas.addEventListener("touchmove", function(e){
 
             let change = distance - lastDistance;
 
-            camera.zoom += change * 0.005;
+             camera.zoom += change * 0.01;
 
             if(camera.zoom < 0.2){
                 camera.zoom = 0.2;
