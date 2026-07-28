@@ -13,7 +13,21 @@ let camera = {
 };
 
 
-// STAR
+// BACKGROUND STARS
+let stars = [];
+
+for (let i = 0; i < 150; i++) {
+
+    stars.push({
+        x: Math.random() * 2000 - 1000,
+        y: Math.random() * 2000 - 1000,
+        size: Math.random() * 2 + 1
+    });
+
+}
+
+
+// STAR (our sun)
 let star = {
     x: 0,
     y: 0,
@@ -60,6 +74,7 @@ canvas.addEventListener("touchmove", function(e){
             if(camera.zoom > 5){
                 camera.zoom = 5;
             }
+
         }
 
         lastDistance = distance;
@@ -81,9 +96,10 @@ function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
 
-    // CAMERA
     ctx.save();
 
+
+    // CAMERA
     ctx.translate(
         canvas.width / 2 - camera.x,
         canvas.height / 2 - camera.y
@@ -93,7 +109,21 @@ function draw(){
 
 
 
-    // STAR
+    // DRAW BACKGROUND STARS
+    for(let i = 0; i < stars.length; i++){
+
+        let s = stars[i];
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+    }
+
+
+
+    // DRAW SUN
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
     ctx.fillStyle = "yellow";
@@ -107,11 +137,12 @@ function draw(){
 
 
 
-    // PLANET
+    // DRAW PLANET
     ctx.beginPath();
     ctx.arc(planetX, planetY, planet.radius, 0, Math.PI * 2);
     ctx.fillStyle = "blue";
     ctx.fill();
+
 
 
     ctx.restore();
