@@ -38,7 +38,7 @@ let star = {
 // PLANET
 let planet = {
     angle: 0,
-    distance: 150,
+    distance: 500,
     radius: 5,
     speed: 0.02
 };
