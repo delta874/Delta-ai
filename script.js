@@ -37,14 +37,14 @@ let star = {
 
 let planet = {
     angle: 0,
-    distance: 700,
+    distance: 1000,
     radius: 15,
     speed: 0.02
 };
 
 let moon = {
     angle: 0,
-    distance: 60,
+    distance: 80,
     radius: 2,
     speed: 0.08
 };
