@@ -16,7 +16,7 @@ let camera = {
 // BACKGROUND STARS
 let stars = [];
 
-for (let i = 0; i < 210; i++) {
+for (let i = 0; i < 500; i++) {
 
     stars.push({
         x: Math.random() * 2000 - 1000,
