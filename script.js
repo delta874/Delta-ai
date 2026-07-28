@@ -31,23 +31,27 @@ for (let i = 0; i < 500; i++) {
 let star = {
     x: 0,
     y: 0,
-    radius: 150
+    radius: 90
 };
 
 
+// PLANET
 let planet = {
     angle: 0,
-    distance: 1000,
-    radius: 15,
+    distance: 150,
+    radius: 5,
     speed: 0.02
 };
 
+
+// MOON
 let moon = {
     angle: 0,
-    distance: 80,
+    distance: 15,
     radius: 2,
     speed: 0.08
 };
+
 
 // PINCH ZOOM
 let lastDistance = null;
