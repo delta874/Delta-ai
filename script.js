@@ -138,10 +138,46 @@ function draw(){
 
 
     // DRAW PLANET
-    ctx.beginPath();
-    ctx.arc(planetX, planetY, planet.radius, 0, Math.PI * 2);
-    ctx.fillStyle = "blue";
-    ctx.fill();
+    // PLANET BODY
+let gradient = ctx.createRadialGradient(
+    planetX - 3,
+    planetY - 3,
+    2,
+    planetX,
+    planetY,
+    planet.radius
+);
+
+gradient.addColorStop(0, "#4db8ff");
+gradient.addColorStop(1, "#003366");
+
+
+ctx.beginPath();
+ctx.arc(
+    planetX,
+    planetY,
+    planet.radius,
+    0,
+    Math.PI * 2
+);
+
+ctx.fillStyle = gradient;
+ctx.fill();
+
+
+// ATMOSPHERE GLOW
+ctx.beginPath();
+ctx.arc(
+    planetX,
+    planetY,
+    planet.radius + 3,
+    0,
+    Math.PI * 2
+);
+
+ctx.strokeStyle = "rgba(100,200,255,0.5)";
+ctx.lineWidth = 2;
+ctx.stroke();
 
 
 
