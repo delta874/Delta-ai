@@ -1,67 +1,101 @@
 body {
 
     margin:0;
-    background:#050505;
-    color:white;
+
+    height:100vh;
+
+    background:#020202;
+
+    color:#eeeeee;
 
     font-family:"Cinzel", serif;
+
+    overflow:hidden;
 
 }
 
 
 
-#menu {
+#game {
 
     height:100vh;
 
     display:flex;
+
     flex-direction:column;
 
     justify-content:center;
+
     align-items:center;
 
 }
 
 
 
-    h1 {
+/* MAIN HEART SHADOW BOX */
 
-    font-size:55px;
+#storyBox {
 
-    letter-spacing:10px;
+    width:70%;
 
-    color:#8b0000;
+    min-height:250px;
+
+    background:rgba(20,0,0,0.55);
+
+    border:2px solid rgba(120,0,0,0.7);
+
+    box-shadow:
+
+    0 0 20px rgba(150,0,0,0.4),
+
+    inset 0 0 30px rgba(100,0,0,0.4);
+
+
+    padding:35px;
 
     text-align:center;
 
-    width:100%;
-
-    text-shadow:
-    0 0 10px red,
-    0 0 20px darkred;
+    animation:pulse 4s infinite;
 
 }
 
 
 
+/* TEXT */
+
+#scene {
+
+    font-size:22px;
+
+    line-height:1.7;
+
+}
+
+
+
+/* BUTTONS */
 
 button {
 
-    font-family:"Cinzel", serif;
+    margin:15px;
 
-    background:#120000;
+    padding:12px 30px;
+
+
+    background:#080000;
 
     color:white;
 
-    border:1px solid #800000;
 
-    padding:15px 45px;
+    border:1px solid #700000;
 
-    margin:10px;
 
-    font-size:18px;
+    font-family:"Cinzel", serif;
 
     cursor:pointer;
+
+
+    transition:0.3s;
 
 }
 
@@ -69,6 +103,64 @@ button {
 
 button:hover {
 
-    background:#400000;
+    background:#300000;
+
+    box-shadow:0 0 15px red;
+
+}
+
+
+
+/* LOWER MENU */
+
+#menuBar {
+
+    margin-top:30px;
+
+
+    background:rgba(10,0,0,0.6);
+
+
+    border:1px solid rgba(120,0,0,0.5);
+
+
+    padding:10px;
+
+
+}
+
+
+
+/* HEART PULSE */
+
+@keyframes pulse {
+
+
+    0% {
+
+        box-shadow:
+
+        0 0 15px rgba(150,0,0,0.3);
+
+    }
+
+
+    50% {
+
+        box-shadow:
+
+        0 0 35px rgba(200,0,0,0.7);
+
+    }
+
+
+    100% {
+
+        box-shadow:
+
+        0 0 15px rgba(150,0,0,0.3);
+
+    }
+
 
 }
