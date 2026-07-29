@@ -1,88 +1,141 @@
-let respect = 50;
-let hunger = 50;
+// THE CARETAKER
+// Main Game Script
 
 
 function startGame(){
 
-document.getElementById("scene").innerHTML =
-`
-You awaken in the chamber.
-
-The sound comes first.
-
-THUMP.
-
-THUMP.
-
-THUMP.
-
-Before you stands the Heart.
-
-A god older than memory.
-
-It waits.
-`;
-
-showChoices();
-
-}
+    // Hide main menu
+    document.getElementById("menu").style.display = "none";
 
 
-function showChoices(){
-
-let choices = document.getElementById("choices");
-
-choices.innerHTML = "";
+    // Show game screen
+    document.getElementById("game").style.display = "block";
 
 
-let feed = document.createElement("button");
-feed.innerHTML="Feed the Heart";
+    // Opening journal entry
+    document.getElementById("scene").innerHTML = `
 
-feed.onclick=function(){
+    <p>
+    I woke in the sacred chambers.
+    </p>
 
-respect += 10;
-hunger -= 10;
+    <p>
+    The cold had settled into the stone walls.
+    I could feel it creeping through my clothes,
+    through my hands,
+    through my bones.
+    </p>
 
-document.getElementById("scene").innerHTML=
-`
-You give what you found to the Heart.
+    <p>
+    The only light came from my small oil lantern.
+    The flame danced against the darkness,
+    barely reaching the ancient walls around me.
+    </p>
 
-The chamber grows warmer.
+    <p>
+    I had spent another night beneath the earth.
+    Another night beside the Heart.
+    </p>
 
-The heartbeat becomes calmer.
+    <p>
+    Then I heard it.
+    </p>
 
-But your stomach aches.
-`;
+    <p>
+    THUMP.
+    </p>
 
-};
+    <p>
+    THUMP.
+    </p>
 
+    <p>
+    THUMP.
+    </p>
 
-let keep = document.createElement("button");
-keep.innerHTML="Keep the food";
+    <p>
+    My god was awake.
+    </p>
 
-keep.onclick=function(){
-
-respect -= 10;
-hunger += 10;
-
-document.getElementById("scene").innerHTML=
-`
-You hide the food away.
-
-For the first time in days...
-
-you feel like you chose yourself.
-
-The Heart says nothing.
-`;
-
-};
+    `;
 
 
-choices.appendChild(feed);
-choices.appendChild(keep);
+    // First choice buttons
+    showFirstChoice();
 
 }
 
 
-startGame();
+
+function showFirstChoice(){
+
+    let choices = document.getElementById("choices");
+
+    choices.innerHTML = "";
+
+
+    let approach = document.createElement("button");
+
+    approach.innerHTML = "Approach the Heart";
+
+
+    approach.onclick = function(){
+
+        document.getElementById("scene").innerHTML = `
+
+        <p>
+        I stepped closer.
+        </p>
+
+        <p>
+        Every step echoed through the sacred chamber.
+        </p>
+
+        <p>
+        I placed my hand upon the cold stone surrounding it.
+        </p>
+
+        <p>
+        The Heart answered with a sound that shook the room.
+        </p>
+
+        <p>
+        THUMP.
+        </p>
+
+        `;
+
+        choices.innerHTML = "";
+
+    };
+
+
+    let wait = document.createElement("button");
+
+    wait.innerHTML = "Remain in the darkness";
+
+
+    wait.onclick = function(){
+
+        document.getElementById("scene").innerHTML = `
+
+        <p>
+        I stayed where I was.
+        </p>
+
+        <p>
+        Some days I wondered if I feared the Heart...
+        or if I feared what would happen without it.
+        </p>
+
+        `;
+
+        choices.innerHTML = "";
+
+    };
+
+
+    choices.appendChild(approach);
+    choices.appendChild(wait);
+
+}
