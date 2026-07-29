@@ -1,3 +1,5 @@
+let heartSound = document.getElementById("heartSound");
+
 // THE CARETAKER
 // Main Game Script
 
