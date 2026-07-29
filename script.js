@@ -5,7 +5,10 @@ let heartSound = document.getElementById("heartSound");
 
 
 function startGame(){
+heartSound.volume = 0.35;
+heartSound.play();
 
+    
     // Hide main menu
     document.getElementById("menu").style.display = "none";
 
