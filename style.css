@@ -1,19 +1,31 @@
 body {
-    margin: 0;
-    overflow: hidden;
-    background: black;
+    margin:0;
+    background:black;
+    color:white;
+    font-family:serif;
 }
 
-canvas {
-    display: block;
+#game {
+    padding:20px;
 }
 
-body {
-    margin: 0;
-    overflow: hidden;
+h1 {
+    text-align:center;
+    color:#aa0000;
 }
 
-canvas {
-    display: block;
-    touch-action: none;
+#scene {
+    min-height:300px;
+    border:2px solid #550000;
+    padding:20px;
+    background:#111;
+    font-size:18px;
+}
+
+button {
+    background:#220000;
+    color:white;
+    border:1px solid red;
+    padding:15px;
+    margin:10px;
 }
