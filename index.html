@@ -14,53 +14,45 @@
 
 <body>
 
-<audio id="heartSound" loop>
-    <source src="audio/77721_cs272_heart_beat_slow.mp3" type="audio/mpeg">
-</audio>
-  
-<div id="menu">
 
-<h1>THE CARETAKER</h1>
+<div id="game">
 
 
-<button onclick="startGame()">
-BEGIN CARETAKING
-</button>
+    <!-- DIALOGUE AREA -->
+    <div id="storyBox">
+
+        <div id="scene">
+
+            I woke in the sacred chambers.<br><br>
+
+            The cold was the first thing I felt.
+
+        </div>
 
 
-<button>
-CONTINUE
-</button>
+        <div id="choices">
 
+            <button>Continue</button>
 
-<button>
-SETTINGS
-</button>
+        </div>
 
-
-<button>
-CREDITS
-</button>
-
-
-</div>
+    </div>
 
 
 
-<div id="game" style="display:none;">
+    <!-- LOWER MENU -->
+    <div id="menuBar">
 
-<div id="scene">
+        <button>Inventory</button>
 
-</div>
+        <button>Map</button>
 
+        <button>Journal</button>
 
-<div id="choices">
-
-</div>
+    </div>
 
 
 </div>
-
 
 
 <script src="script.js"></script>
