@@ -1,31 +1,69 @@
 body {
+
     margin:0;
-    background:black;
+    background:#050505;
     color:white;
-    font-family:serif;
+
+    font-family:"Cinzel", serif;
+
 }
 
-#game {
-    padding:20px;
+
+
+#menu {
+
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
 }
+
+
 
 h1 {
-    text-align:center;
-    color:#aa0000;
+
+    font-size:55px;
+
+    letter-spacing:10px;
+
+    color:#8b0000;
+
+    text-shadow:
+    0 0 10px red,
+    0 0 20px darkred;
+
 }
 
-#scene {
-    min-height:300px;
-    border:2px solid #550000;
-    padding:20px;
-    background:#111;
-    font-size:18px;
-}
+
 
 button {
-    background:#220000;
+
+    font-family:"Cinzel", serif;
+
+    background:#120000;
+
     color:white;
-    border:1px solid red;
-    padding:15px;
+
+    border:1px solid #800000;
+
+    padding:15px 45px;
+
     margin:10px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover {
+
+    background:#400000;
+
 }
